@@ -1,0 +1,77 @@
+﻿@model IEnumerable<ForoAutenticacion.Models.Post>
+
+<h2>Lista de Posts</h2>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Título</th>
+            <th>Contenido</th>
+            <th>Creado por</th>
+            <th>Fecha Creacion</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var post in Model)
+        {
+            <tr>
+                <td>@post.Titulo</td>
+                <td>@post.Contenido</td>
+                <td>@post.User?.UserName</td>
+                <td>@post.FechaCreacion.ToString("dd/MM/yyyy HH:mm")</td>
+                <td>
+                    <a asp-action="Details" asp-route-id="@post.Id">Detalles</a> 
+                    <a asp-action="Edit" asp-route-id="@post.Id">Editar</a> 
+                    <a asp-action="Delete" asp-route-id="@post.Id" class="btn btn-danger btn-sm">Eliminar</a>                   
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<a asp-action="Create" class="btn btn-primary">Crear nueva publicación</a> 
+
+@*
+@model IEnumerable<ForoAutenticacion.Models.Post>
+
+
+@{
+    ViewData["Title"] = "Lista de Publicaciones";
+}
+
+<h1>Publicaciones</h1>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Título</th>
+            <th>Contenido</th>
+            <th>Fecha</th>
+            <th>Usuario</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@item.Titulo</td>
+                <td>@item.Contenido</td>
+                <td>@item.FechaCreacion.ToString("g")</td>
+                <td>Creado por: @post.User?.UserName</td>
+              @*  <td>@item.Usuario?.UserName</td>        
+                <td>
+                    <a asp-action="Edit" asp-route-id="@item.Id">Editar</a> |
+                    <a asp-action="Details" asp-route-id="@item.Id">Detalles</a> |
+                    <a asp-action="Delete" asp-route-id="@item.Id">Eliminar</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table> 
+
+<a asp-action="Create" class="btn btn-primary">Crear nueva publicación</a> *@
+
+
+
+

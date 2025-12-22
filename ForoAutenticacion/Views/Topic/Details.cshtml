@@ -1,0 +1,46 @@
+﻿@model ForoAutenticacion.Models.Topic
+
+<h2>@Model.Titulo</h2>
+<p>@Model.Contenido</p>
+<p><strong>Publicado por:</strong> @Model.AutorEmail - @Model.FechaCreacion</p>
+
+<hr />
+
+<h4>Respuestas</h4>
+
+@if (Model.Respuestas != null && Model.Respuestas.Count > 0)
+{
+    foreach (var r in Model.Respuestas)
+    {
+        <div class="mb-3 border-bottom pb-2">
+            <p>@r.Contenido</p>
+            <small>Por @r.AutorEmail - @r.FechaCreacion</small>
+        </div>
+    }
+}
+else
+{
+    <p>No hay respuestas todavía.</p>
+}
+
+<hr />
+
+@if (User.Identity.IsAuthenticated)
+{
+    <form asp-action="AgregarRespuesta" method="post">
+        <input type="hidden" name="topicId" value="@Model.Id" />
+        <div class="form-group">
+            <label>Escribe una respuesta:</label>
+            <textarea name="contenido" class="form-control" required></textarea>
+        </div>
+        <button type="submit" class="btn btn-primary mt-2">Responder</button>
+    </form>
+}
+else
+{
+    <p><a asp-area="Identity" asp-page="/Account/Login">Inicia sesión</a> para responder.</p>
+}
+<p class="mt-4">
+    <a asp-action="Index" class="btn btn-secondary">← Volver a la lista de temas</a>
+</p> 
+
